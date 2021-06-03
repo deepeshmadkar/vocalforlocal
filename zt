@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+if [ $# -gt 0 ]; then
+    
+    if [ "$1" == "artisan" ] || [ "$1" == "art" ] || [ "$1" == "a" ]; then
+        shift 1
+            php artisan "$@"
+
+    elif [ "$1" == "ga" ]; then
+        shift 1
+            git add . && git commit -am"$@"
+    
+    elif [ "$1" == "mg" ]; then
+        shift 1
+            php artisan migrate
+    
+    elif [ "$1" == "mgr" ]; then
+        shift 1
+            php artisan migrate:rollback
+    
+    elif [ "$1" == "model" ]; then
+        shift 1
+            php artisan make:model "$@" -m
+    
+    elif [ "$1" == "web" ]; then
+        shift 1
+            VAR2="Controller"
+            php artisan make:controller "$@$VAR2" --resource
+    
+    elif [ "$1" == "api" ]; then
+        shift 1
+            VAR2="Controller"
+            php artisan make:controller "$@$VAR2" --api
+    
+    elif [ "$1" == "serve" ]; then
+        shift 1
+            php artisan serve --port="$@"
+    
+    elif [ "$1" == "gs" ]; then
+        shift 1
+            git status
+    
+    elif [ "$1" == "gp" ]; then
+        shift 1
+            git push origin master
+
+    elif [ "$1" == "commit" ]; then
+        shift 1
+            git add . && git commit -am"repo feature updated"
+
+    elif [ "$1" == "zcommit" ]; then
+        shift 1
+            git add . && git commit -am"$@"
+
+    elif [ "$1" == "ga" ]; then
+            shift 1
+                git add . && git commit -am"$@"
+    
+    elif [ "$1" == "push" ]; then
+        shift 1
+            git add . && git commit -am"$@" && git push origin main 
+    
+    elif [ "$1" == "pac" ]; then
+        shift 1
+            php artisan optimize:clear
+    
+    elif [ "$1" == "coo" ]; then
+        shift 1
+            composer dump-autoload -o
+
+    elif [ "$1" == "nd" ]; then
+        shift 1
+            npm run dev
+
+    elif [ "$1" == "np" ]; then
+        shift 1
+            npm run prod
+    
+    elif [ "$1" == "test" ]; then
+        shift 1
+            ./vendor/bin/phpunit "$@"
+    
+    elif [ "$1" == "ztest" ]; then
+        shift 1
+            ./vendor/bin/phpunit --filter "$@"
+
+
+    elif [ "$1" == "rl" ]; then
+         shift 1
+            php artisan route:list --name="$@"
+
+    else
+       php artisan 
+    fi
+
+else
+    php artisan
+fi
